@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import './QuantityRocker.scss';
 
-const QuantityRocker = () => {
+type QuantityRockerProps = {
+
+}
+
+const QuantityRocker:FC<QuantityRockerProps> = () => {
   const [inputValue, setInputValue] = useState('');
   const [previousInputValue, setPreviousInputValue] = useState('');
 
@@ -27,7 +31,10 @@ const QuantityRocker = () => {
     <div className="quantity-rocker">
       <button
         disabled={+inputValue <= 0}
-        onClick={() => setInputValue(String(+inputValue - 1))}
+        onClick={() => {
+          setInputValue(String(+inputValue - 1));
+          setPreviousInputValue(String(+inputValue - 1));
+        }}
         className="rocker-button"
       >
         −
@@ -42,7 +49,11 @@ const QuantityRocker = () => {
         onFocus={(e) => e.target.select()}
       />
       <button
-        onClick={() => setInputValue(String(+inputValue + 1))}
+        onClick={() => {
+          console.log(inputValue);
+          setInputValue(String(+inputValue + 1));
+          setPreviousInputValue(String(+inputValue + 1));
+        }}
         className="rocker-button"
       >
         +

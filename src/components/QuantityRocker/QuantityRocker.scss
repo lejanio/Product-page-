@@ -22,9 +22,16 @@
   font-size: 28px;
   color: var(--primary);
   border: 1px solid var(--primary);
+  transition: 0.1s;
 
   &:hover {
     cursor: pointer;
+    border: 2px solid var(--primary);
+  }
+
+  &:active {
+    color: var(--accent-red);
+    border: 3px solid var(--accent-red);
   }
 
   &:disabled {

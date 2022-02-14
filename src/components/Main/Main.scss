@@ -189,10 +189,6 @@
   }
 }
 
-//.minimum-order {
-//  display: flex;
-//}
-
 .option-count {
   color: var(--neutral-dark);
 }
@@ -204,6 +200,10 @@
   height: 40px;
   background-color: var(--neutral-light);
   align-items: center;
+
+  &:hover {
+    cursor:pointer;
+  }
 }
 
 @media (min-width: 1320px) {
