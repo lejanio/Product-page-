@@ -1,3 +1,32 @@
+# Product Page - AliExpress Clone
+
+A working project can be found here: 
+
+## General Description 
+
+The page shows product info (fetched from API) displaying the available options and their price. Moreover, it
+provides the possibility to choose the necessary quantity per option calculating the total price for each option,
+as well as the cart total.
+It also shows a timer countdown until the end of the sale.
+
+The project is implemented using React (with TypeScript) following the responsive design
+principles for mobile and desktop versions.
+
+## Project structure
+
+1. The entry file is App.tsx:
+    - Contains the main section component which, in turn, contains the quantity rocker, timer and button components
+2. Main.tsx file:
+    - Contains states for fetched product data, product quantity inputs, product rating, as well as 
+   calculated amounts for cart
+    - Contains several instances of the quantity selector component
+    - Contains several instances of the button component
+    - Contains the timer component
+3. The components are located in the src/components folder with a separate subfolder for the files
+   of each corresponding component.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -5,6 +34,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+Installs the necessary project dependencies.
 
 ### `npm start`
 

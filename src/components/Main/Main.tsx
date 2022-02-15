@@ -150,7 +150,7 @@ const Main = () => {
                     Reviews
                   </div>
                 </div>
-                <div>
+                <div className="buyers">
                   {reviews.total_buyers}
                   {' '}
                   buyers
