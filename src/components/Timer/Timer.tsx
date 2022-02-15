@@ -38,8 +38,8 @@ const Timer:FC<TimerProps> = ({ endDate }) => {
   }, []);
 
   return (
-    <div className="timer-wrapper">
-      <div className="timer-inner">
+    <div>
+      <div>
         {days}
         d:
         {hours}

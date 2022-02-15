@@ -17,234 +17,11 @@ import informationIcon from '../../assets/images/information_icon.png';
 import mailIcon from '../../assets/images/mail_icon.png';
 import star from '../../assets/images/star_icon.png';
 import './Main.scss';
-
-type ProductType = {
-  name: string;
-  'tags': string [];
-  'options': [
-    {
-      'label': string;
-      'price': {
-        'value': string;
-        'currency': {
-          'code': string;
-          'symbol': string;
-          'format': string;
-        }
-      },
-      'old_price': {
-        'value': string;
-        'currency': {
-          'code': string;
-          'symbol': string;
-          'format': string;
-        }
-      }
-    },
-    {
-      'label': string;
-      'price': {
-        'value': string;
-        'currency': {
-          'code': string;
-          'symbol': string;
-          'format': string;
-        }
-      },
-      'old_price': {
-        'value': string;
-        'currency': {
-          'code': string;
-          'symbol': string;
-          'format': string;
-        }
-      }
-    }
-  ],
-  'discount': {
-    'amount': string;
-    'end_date': string;
-  },
-  'gallery': [
-    {
-      'main': string;
-    },
-    {
-      'main': string;
-    }
-  ],
-  'shipping': {
-    'method': {
-      'country': string;
-      'title': string;
-      'shipping_time': {
-        'value': string;
-        'info': string;
-      },
-      'cost': {
-        'value': string;
-        'currency': {
-          'code': string;
-          'symbol': string;
-          'format': string;
-        }
-      }
-    },
-    'lead_time': {
-      'value': string;
-      'info': string;
-    },
-    'props': {
-      'ready_to_ship': boolean;
-      'in_stock': boolean;
-      'fast_dispatch': boolean;
-    }
-  },
-  'reviews': {
-    'rating': string;
-    'count': number;
-    'total_buyers': number;
-  }
-}
-
-type RequestType = {
-    product: ProductType;
-    success: number;
-}
-
-const initialState: ProductType = {
-  name: '',
-  tags: [],
-  options: [
-    {
-      label: '',
-      price: {
-        value: '',
-        currency: {
-          code: '',
-          symbol: '',
-          format: '',
-        },
-      },
-      old_price: {
-        value: '',
-        currency: {
-          code: '',
-          symbol: '',
-          format: '',
-        },
-      },
-    },
-    {
-      label: '',
-      price: {
-        value: '',
-        currency: {
-          code: '',
-          symbol: '',
-          format: '',
-        },
-      },
-      old_price: {
-        value: '',
-        currency: {
-          code: '',
-          symbol: '',
-          format: '',
-        },
-      },
-    },
-  ],
-  discount: {
-    amount: '',
-    end_date: '',
-  },
-  gallery: [
-    {
-      main: '',
-    },
-    {
-      main: '',
-    },
-  ],
-  shipping: {
-    method: {
-      country: '',
-      title: '',
-      shipping_time: {
-        value: '',
-        info: '',
-      },
-      cost: {
-        value: '',
-        currency: {
-          code: '',
-          symbol: '',
-          format: '',
-        },
-      },
-    },
-    lead_time: {
-      value: '',
-      info: '',
-    },
-    props: {
-      ready_to_ship: false,
-      in_stock: false,
-      fast_dispatch: false,
-    },
-  },
-  reviews: {
-    rating: '',
-    count: 0,
-    total_buyers: 0,
-  },
-};
-
-const optionsInitialState = [
-  {
-    label: '1080p',
-    currency: 'R',
-    price: '833.99',
-    quantity: '0',
-    totalAmount: 0,
-  },
-  {
-    label: '4K',
-    currency: 'R',
-    price: '895.31',
-    quantity: '0',
-    totalAmount: 0,
-  },
-  {
-    label: 'Battery (Accessories)',
-    currency: 'R',
-    price: '78.50',
-    quantity: '0',
-    totalAmount: 0,
-  },
-];
-
-const cartProductTotalsInitialState = [
-  {
-    label: '1080p',
-    currency: 'R',
-    totalAmount: 0,
-  },
-  {
-    label: '4K',
-    currency: 'R',
-    totalAmount: 0,
-  },
-  {
-    label: 'Battery (Accessories)',
-    currency: 'R',
-    totalAmount: 0,
-  },
-];
+import { RequestType } from './types';
+import { productInitialState, optionsInitialState, cartProductTotalsInitialState } from './initialStates';
 
 const Main = () => {
-  const [product, setProduct] = useState(initialState);
+  const [product, setProduct] = useState(productInitialState);
   const [starRating, setStarRating] = useState<string[]>([]);
   const [optionQuantityValues, setOptionQuantityValues] = useState(optionsInitialState);
   const [productTotals, setProductTotals] = useState(cartProductTotalsInitialState);
@@ -367,13 +144,13 @@ const Main = () => {
                       {reviews.rating}
                     </div>
                   </div>
-                  <div className="rating-count">
+                  <div>
                     {reviews.count}
                     {' '}
                     Reviews
                   </div>
                 </div>
-                <div className="buyers">
+                <div>
                   {reviews.total_buyers}
                   {' '}
                   buyers
@@ -401,7 +178,7 @@ const Main = () => {
                     <span className="pipe">|</span>
                   </span>
                   &nbsp;
-                  <span className="minimum-order">
+                  <span>
                     <span className="option-count">
                       {optionsSortedByPrice.length}
                       {' '}
@@ -467,8 +244,8 @@ const Main = () => {
                   key={item[1].label}
                   className="option"
                 >
-                  <div className="option__title">{item[1].label}</div>
-                  <div className="option__price">
+                  <div>{item[1].label}</div>
+                  <div>
                     {item[1].price.currency.symbol}
                     {' '}
                     {(Number(item[1].price.value)).toLocaleString()}
@@ -535,7 +312,7 @@ const Main = () => {
               </div>
               <div className="summary-section">
                 <div className="grid">
-                  <div className="shipment-information">
+                  <div>
                     <div>
                       Ship to
                       {' '}

@@ -300,8 +300,17 @@
 
 @media (min-width: 1320px) {
   .option {
-    grid-template-columns: 148px 1fr 160px;
+    grid-template-columns: 180px 1fr 160px;
   }
+}
+
+
+.description-section__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  font-size: 12px;
 }
 
 .description-section__footer-item {
