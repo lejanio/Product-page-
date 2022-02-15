@@ -1,15 +1,15 @@
 # Product Page - AliExpress Clone
 
-A working project can be found here: 
+A working project can be found here: https://lejanio.github.io/product-page
 
 ## General Description 
 
-The page shows product info (fetched from API) displaying the available options and their price. Moreover, it
+The page shows product info (fetched from API using an Axios request) displaying the available options and their price. Moreover, it
 provides the possibility to choose the necessary quantity per option calculating the total price for each option,
 as well as the cart total.
 It also shows a timer countdown until the end of the sale.
 
-The project is implemented using React (with TypeScript) following the responsive design
+The project is implemented using React, TypeScript and Axios; following the responsive design
 principles for mobile and desktop versions.
 
 ## Project structure
