@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Timer from '../Timer/Timer';
 import QuantityRocker from '../QuantityRocker/QuantityRocker';
 import Button from '../Button/Button';
+import spinner from '../../assets/images/spinner.gif';
 import checkmark from '../../assets/images/checkmark_icon.png';
 import promoLogo from '../../assets/images/march_expo_logo.png';
 import chevron from '../../assets/images/chevron_icon.png';
@@ -16,7 +17,6 @@ import informationIcon from '../../assets/images/information_icon.png';
 import mailIcon from '../../assets/images/mail_icon.png';
 import star from '../../assets/images/star_icon.png';
 import './Main.scss';
-import '../../index.css';
 
 type ProductType = {
   name: string;
@@ -201,9 +201,54 @@ const initialState: ProductType = {
   },
 };
 
+const optionsInitialState = [
+  {
+    label: '1080p',
+    currency: 'R',
+    price: '833.99',
+    quantity: '0',
+    totalAmount: 0,
+  },
+  {
+    label: '4K',
+    currency: 'R',
+    price: '895.31',
+    quantity: '0',
+    totalAmount: 0,
+  },
+  {
+    label: 'Battery (Accessories)',
+    currency: 'R',
+    price: '78.50',
+    quantity: '0',
+    totalAmount: 0,
+  },
+];
+
+const cartProductTotalsInitialState = [
+  {
+    label: '1080p',
+    currency: 'R',
+    totalAmount: 0,
+  },
+  {
+    label: '4K',
+    currency: 'R',
+    totalAmount: 0,
+  },
+  {
+    label: 'Battery (Accessories)',
+    currency: 'R',
+    totalAmount: 0,
+  },
+];
+
 const Main = () => {
   const [product, setProduct] = useState(initialState);
   const [starRating, setStarRating] = useState<string[]>([]);
+  const [optionQuantityValues, setOptionQuantityValues] = useState(optionsInitialState);
+  const [productTotals, setProductTotals] = useState(cartProductTotalsInitialState);
+  const [totalCart, setTotalCart] = useState(0);
 
   const {
     name, gallery, options, reviews, shipping, tags, discount,
@@ -234,6 +279,27 @@ const Main = () => {
     updateRatingArray();
   }, [product]);
 
+  const calculateProductTotal = () => {
+    const newArray = optionQuantityValues.map((item, index) => {
+      const newValue = Number(item.price) * Number(item.quantity);
+      return { ...productTotals[index], totalAmount: newValue };
+    });
+    setProductTotals(newArray);
+  };
+
+  const calculateCartTotal = () => {
+    let total = 0;
+    productTotals.forEach((item) => {
+      total += item.totalAmount;
+    });
+    setTotalCart(total);
+  };
+
+  useEffect(() => {
+    calculateProductTotal();
+    calculateCartTotal();
+  }, [optionQuantityValues, totalCart]);
+
   const productOptionValuesArray = Object.values(options);
   const optionsSortedByPrice = productOptionValuesArray.sort((a, b) => +a.price.value - +b.price.value);
 
@@ -242,7 +308,9 @@ const Main = () => {
   return (
     <>
       {(name === '')
-        ? (<span>Loading...</span>)
+        ? (
+          <img src={spinner} alt="Loading..." className="spinner" />
+        )
         : (
           <div className="main-section">
             <div className="image-section">
@@ -276,9 +344,9 @@ const Main = () => {
                 <div className="heading-container">
                   <h1 className="heading">{name}</h1>
                   <div className="heading-tags">
-                    {product.tags.map((tag) => (
+                    {tags.map((tag) => (
                       <span
-                        key={uuidv4()}
+                        key={tag}
                         className="heading-tag"
                       >
                         {tag}
@@ -317,13 +385,13 @@ const Main = () => {
                   <div className="discounted-prices">
                     {optionsSortedByPrice[0].price.currency.symbol}
                     {' '}
-                    {Number(optionsSortedByPrice[0].price.value).toFixed(2)}
+                    {(Number(optionsSortedByPrice[0].price.value)).toLocaleString()}
                     {' '}
                     -
                     {' '}
                     {optionsSortedByPrice[optionsSortedByPrice.length - 1].price.currency.symbol}
                     {' '}
-                    {Number(optionsSortedByPrice[optionsSortedByPrice.length - 1].price.value).toFixed(2)}
+                    {(Number(optionsSortedByPrice[optionsSortedByPrice.length - 1].price.value)).toLocaleString()}
                   </div>
                 </div>
                 <div className="pricing__text">
@@ -394,19 +462,29 @@ const Main = () => {
                 <div className="padding-top-12 large-display">Options:</div>
                 <div className="options">
                   {(discount.end_date !== '')
-              && productOptionEntriesArray.map((item) => (
+              && productOptionEntriesArray.map((item, index) => (
                 <div
-                  key={uuidv4()}
+                  key={item[1].label}
                   className="option"
                 >
                   <div className="option__title">{item[1].label}</div>
                   <div className="option__price">
                     {item[1].price.currency.symbol}
                     {' '}
-                    {Number(item[1].price.value).toFixed(2)}
+                    {(Number(item[1].price.value)).toLocaleString()}
                   </div>
                   <div>
-                    <QuantityRocker />
+                    <QuantityRocker
+                      inputValue={optionQuantityValues[index].quantity}
+                      onChange={(value) => {
+                        const elementIndex = optionQuantityValues.findIndex(
+                          (element) => element.label === item[1].label,
+                        );
+                        const newArray = [...optionQuantityValues];
+                        newArray[elementIndex] = { ...newArray[elementIndex], quantity: value };
+                        setOptionQuantityValues(newArray);
+                      }}
+                    />
                   </div>
                 </div>
               ))}
@@ -435,9 +513,26 @@ const Main = () => {
 
             </section>
             <div className="sidebar">
-              {/* <div className="cart"> */}
-              {/*   (PRODUCTS) */}
-              {/* </div> */}
+              <div className="added-products">
+                {productTotals.map((item, index) => (
+                  (item.totalAmount > 0)
+                    && (
+                      <div
+                        key={item.label}
+                        className="added-product"
+                      >
+                        <div>{item.label}</div>
+                        <div>{optionQuantityValues[index].quantity}</div>
+                        {(totalCart >= 0) && (
+                        <div className="flex gap-4">
+                          <span>{item.currency}</span>
+                          <span>{(Number(item.totalAmount)).toLocaleString()}</span>
+                        </div>
+                        )}
+                      </div>
+                    )
+                ))}
+              </div>
               <div className="summary-section">
                 <div className="grid">
                   <div className="shipment-information">
@@ -458,7 +553,7 @@ const Main = () => {
                   <div className="total-amount">
                     {shipping.method.cost.currency.symbol}
                     {' '}
-                    {Number(Number(shipping.method.cost.value).toFixed(2)).toLocaleString()}
+                    {totalCart.toLocaleString()}
                   </div>
                 </div>
                 <div className="flex vertical-center gap-28">

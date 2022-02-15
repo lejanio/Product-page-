@@ -2,15 +2,15 @@ import React, { FC, useState } from 'react';
 import './QuantityRocker.scss';
 
 type QuantityRockerProps = {
-
+  inputValue: string;
+  onChange: (value: string) => void;
 }
 
-const QuantityRocker:FC<QuantityRockerProps> = () => {
-  const [inputValue, setInputValue] = useState('');
+const QuantityRocker:FC<QuantityRockerProps> = ({ inputValue, onChange }) => {
   const [previousInputValue, setPreviousInputValue] = useState('');
 
   const handleChange = (value: string) => {
-    setInputValue(value);
+    onChange(value);
 
     if (+value <= 0) {
       return;
@@ -20,20 +20,21 @@ const QuantityRocker:FC<QuantityRockerProps> = () => {
   };
 
   const handleBlur = () => {
-    if (+inputValue >= 0) {
+    if (Number(inputValue) >= 0) {
       return;
     }
 
-    setInputValue(previousInputValue);
+    onChange(previousInputValue);
   };
 
   return (
     <div className="quantity-rocker">
       <button
-        disabled={+inputValue <= 0}
+        disabled={Number(inputValue) <= 0}
         onClick={() => {
-          setInputValue(String(+inputValue - 1));
-          setPreviousInputValue(String(+inputValue - 1));
+          const newValue = String(Number(inputValue) - 1);
+          onChange(newValue);
+          setPreviousInputValue(newValue);
         }}
         className="rocker-button"
       >
@@ -50,9 +51,9 @@ const QuantityRocker:FC<QuantityRockerProps> = () => {
       />
       <button
         onClick={() => {
-          console.log(inputValue);
-          setInputValue(String(+inputValue + 1));
-          setPreviousInputValue(String(+inputValue + 1));
+          const newValue = String(Number(inputValue) + 1);
+          onChange(newValue);
+          setPreviousInputValue(newValue);
         }}
         className="rocker-button"
       >

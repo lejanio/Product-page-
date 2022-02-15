@@ -12,7 +12,6 @@ const Timer:FC<TimerProps> = ({ endDate }) => {
 
   useEffect(() => {
     const target = new Date(endDate);
-    const convertedTarget = target.toString();
 
     const intervalId = setInterval(() => {
       if (endDate === '') {
