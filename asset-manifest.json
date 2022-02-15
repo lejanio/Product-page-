@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/product-page/static/css/main.808fb4d9.chunk.css",
+    "main.js": "/product-page/static/js/main.d068a75a.chunk.js",
+    "main.js.map": "/product-page/static/js/main.d068a75a.chunk.js.map",
+    "runtime-main.js": "/product-page/static/js/runtime-main.d7d9c430.js",
+    "runtime-main.js.map": "/product-page/static/js/runtime-main.d7d9c430.js.map",
+    "static/js/2.3eb2a2d2.chunk.js": "/product-page/static/js/2.3eb2a2d2.chunk.js",
+    "static/js/2.3eb2a2d2.chunk.js.map": "/product-page/static/js/2.3eb2a2d2.chunk.js.map",
+    "index.html": "/product-page/index.html",
+    "static/css/main.808fb4d9.chunk.css.map": "/product-page/static/css/main.808fb4d9.chunk.css.map",
+    "static/js/2.3eb2a2d2.chunk.js.LICENSE.txt": "/product-page/static/js/2.3eb2a2d2.chunk.js.LICENSE.txt",
+    "static/media/applepay_icon.19eb5188.svg": "/product-page/static/media/applepay_icon.19eb5188.svg",
+    "static/media/march_expo_logo.aa77fdc7.png": "/product-page/static/media/march_expo_logo.aa77fdc7.png",
+    "static/media/mastercard_icon.3af0e930.svg": "/product-page/static/media/mastercard_icon.3af0e930.svg",
+    "static/media/shield_icon.1f068467.svg": "/product-page/static/media/shield_icon.1f068467.svg",
+    "static/media/spinner.81453d27.gif": "/product-page/static/media/spinner.81453d27.gif",
+    "static/media/visa_icon.11c9e75c.svg": "/product-page/static/media/visa_icon.11c9e75c.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d7d9c430.js",
+    "static/js/2.3eb2a2d2.chunk.js",
+    "static/css/main.808fb4d9.chunk.css",
+    "static/js/main.d068a75a.chunk.js"
+  ]
+}
