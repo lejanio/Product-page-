@@ -12,7 +12,7 @@ const QuantityRocker:FC<QuantityRockerProps> = ({ inputValue, onChange }) => {
   const handleChange = (value: string) => {
     onChange(value);
 
-    if (+value <= 0) {
+    if (Number(value) <= 0) {
       return;
     }
 
@@ -34,6 +34,7 @@ const QuantityRocker:FC<QuantityRockerProps> = ({ inputValue, onChange }) => {
         onClick={() => {
           const newValue = String(Number(inputValue) - 1);
           onChange(newValue);
+
           setPreviousInputValue(newValue);
         }}
         className="rocker-button"
@@ -53,6 +54,7 @@ const QuantityRocker:FC<QuantityRockerProps> = ({ inputValue, onChange }) => {
         onClick={() => {
           const newValue = String(Number(inputValue) + 1);
           onChange(newValue);
+
           setPreviousInputValue(newValue);
         }}
         className="rocker-button"

@@ -24,6 +24,8 @@ principles for mobile and desktop versions.
     - Contains the timer component
 3. The components are located in the src/components folder with a separate subfolder for the files
    of each corresponding component.
+4. Images and icons are located in the src/assets/images folder.
+5. CSS reset file and CSS helper-class file are located in the src/styles folder.
 
 ---
 

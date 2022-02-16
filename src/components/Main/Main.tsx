@@ -64,20 +64,20 @@ const Main = () => {
       optionQuantityValues.forEach(({ quantity, price }) => {
         total += (Number(quantity) * Number(price));
       });
+
       setTotalCart(total);
     };
 
     calculateCartTotal();
   }, [optionQuantityValues]);
 
-  // This array and sorting is necessary for displaying the price interval
+  // This sorting is necessary for rendering the price interval
 
-  const productOptionValuesArray = Object.values(options);
-  const optionsSortedByPrice = productOptionValuesArray.sort((a, b) => +a.price.value - +b.price.value);
+  const optionsSortedByPrice = (Object.values(options)).sort((a, b) => +a.price.value - +b.price.value);
 
   // This array is necessary for displaying options in the order provided in the design
 
-  const productOptionEntriesArray = Object.entries(options);
+  const productOptionEntries = Object.entries(options);
 
   return (
     <>
@@ -234,7 +234,7 @@ const Main = () => {
               <div className="options-container">
                 <div className="padding-top-12 large-display">Options:</div>
                 <div className="options">
-                  {productOptionEntriesArray.map((item, index) => (
+                  {productOptionEntries.map((item, index) => (
                     <div
                       key={item[1].label}
                       className="option"

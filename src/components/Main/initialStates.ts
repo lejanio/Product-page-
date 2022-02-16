@@ -89,6 +89,9 @@ export const productInitialState: ProductType = {
   },
 };
 
+// Numerical values are set as strings to ensure that the functionality regarding entering
+//  invalid (negative) values can be obtained
+
 export const optionsInitialState = [
   {
     label: '1080p',
