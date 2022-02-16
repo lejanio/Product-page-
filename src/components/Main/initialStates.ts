@@ -95,7 +95,6 @@ export const optionsInitialState = [
     currency: 'R',
     price: '833.99',
     quantity: '0',
-    totalAmount: 0,
   },
   {
     label: '4K',
@@ -109,24 +108,5 @@ export const optionsInitialState = [
     currency: 'R',
     price: '78.50',
     quantity: '0',
-    totalAmount: 0,
-  },
-];
-
-export const cartProductTotalsInitialState = [
-  {
-    label: '1080p',
-    currency: 'R',
-    totalAmount: 0,
-  },
-  {
-    label: '4K',
-    currency: 'R',
-    totalAmount: 0,
-  },
-  {
-    label: 'Battery (Accessories)',
-    currency: 'R',
-    totalAmount: 0,
   },
 ];

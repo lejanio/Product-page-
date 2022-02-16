@@ -18,67 +18,61 @@ import mailIcon from '../../assets/images/mail_icon.png';
 import star from '../../assets/images/star_icon.png';
 import './Main.scss';
 import { RequestType } from './types';
-import { productInitialState, optionsInitialState, cartProductTotalsInitialState } from './initialStates';
+import { productInitialState, optionsInitialState } from './initialStates';
 
 const Main = () => {
   const [product, setProduct] = useState(productInitialState);
   const [starRating, setStarRating] = useState<string[]>([]);
   const [optionQuantityValues, setOptionQuantityValues] = useState(optionsInitialState);
-  const [productTotals, setProductTotals] = useState(cartProductTotalsInitialState);
   const [totalCart, setTotalCart] = useState(0);
 
   const {
     name, gallery, options, reviews, shipping, tags, discount,
   } = product;
 
-  const fetchData = async () => {
-    await axios.get<RequestType>('https://fe-assignment.vaimo.net/')
-      .then((res) => {
-        const result = res.data;
-
-        setProduct(result.product);
-      });
-  };
-
   useEffect(() => {
+    const fetchData = () => {
+      axios.get<RequestType>('https://fe-assignment.vaimo.net/')
+        .then((res) => {
+          const result = res.data;
+
+          setProduct(result.product);
+        });
+    };
+
     fetchData();
   }, []);
 
-  const updateRatingArray = () => {
-    const ratingArray: any = [];
-    for (let i = 0; i < Math.floor(+reviews.rating); i += 1) {
-      ratingArray.push(star);
-    }
-    setStarRating([...ratingArray]);
-  };
-
   useEffect(() => {
+    const updateRatingArray = () => {
+      const ratingArray: any = [];
+      for (let i = 0; i < Math.floor(Number(reviews.rating)); i += 1) {
+        ratingArray.push(star);
+      }
+      setStarRating([...ratingArray]);
+    };
+
     updateRatingArray();
   }, [product]);
 
-  const calculateProductTotal = () => {
-    const newArray = optionQuantityValues.map((item, index) => {
-      const newValue = Number(item.price) * Number(item.quantity);
-      return { ...productTotals[index], totalAmount: newValue };
-    });
-    setProductTotals(newArray);
-  };
-
-  const calculateCartTotal = () => {
-    let total = 0;
-    productTotals.forEach((item) => {
-      total += item.totalAmount;
-    });
-    setTotalCart(total);
-  };
-
   useEffect(() => {
-    calculateProductTotal();
+    const calculateCartTotal = () => {
+      let total = 0;
+      optionQuantityValues.forEach(({ quantity, price }) => {
+        total += (Number(quantity) * Number(price));
+      });
+      setTotalCart(total);
+    };
+
     calculateCartTotal();
   }, [optionQuantityValues, totalCart]);
 
+  // This array and sorting is necessary for displaying the price interval
+
   const productOptionValuesArray = Object.values(options);
   const optionsSortedByPrice = productOptionValuesArray.sort((a, b) => +a.price.value - +b.price.value);
+
+  // This array is necessary for displaying options in the order provided in the design
 
   const productOptionEntriesArray = Object.entries(options);
 
@@ -229,8 +223,7 @@ const Main = () => {
                   Discount ends in
                   <div className="discount-timer">
                     <img src={clock} alt="clock" />
-                    {(discount.end_date !== '')
-                      && (<Timer endDate={discount.end_date} />)}
+                    <Timer endDate={discount.end_date} />
                   </div>
                 </div>
               </div>
@@ -238,33 +231,32 @@ const Main = () => {
               <div className="options-container">
                 <div className="padding-top-12 large-display">Options:</div>
                 <div className="options">
-                  {(discount.end_date !== '')
-              && productOptionEntriesArray.map((item, index) => (
-                <div
-                  key={item[1].label}
-                  className="option"
-                >
-                  <div>{item[1].label}</div>
-                  <div>
-                    {item[1].price.currency.symbol}
-                    {' '}
-                    {(Number(item[1].price.value)).toLocaleString()}
-                  </div>
-                  <div>
-                    <QuantityRocker
-                      inputValue={optionQuantityValues[index].quantity}
-                      onChange={(value) => {
-                        const elementIndex = optionQuantityValues.findIndex(
-                          (element) => element.label === item[1].label,
-                        );
-                        const newArray = [...optionQuantityValues];
-                        newArray[elementIndex] = { ...newArray[elementIndex], quantity: value };
-                        setOptionQuantityValues(newArray);
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
+                  {productOptionEntriesArray.map((item, index) => (
+                    <div
+                      key={item[1].label}
+                      className="option"
+                    >
+                      <div>{item[1].label}</div>
+                      <div>
+                        {item[1].price.currency.symbol}
+                        {' '}
+                        {(Number(item[1].price.value)).toLocaleString()}
+                      </div>
+                      <div>
+                        <QuantityRocker
+                          inputValue={optionQuantityValues[index].quantity}
+                          onChange={(value) => {
+                            const elementIndex = optionQuantityValues.findIndex(
+                              (element) => element.label === item[1].label,
+                            );
+                            const newArray = [...optionQuantityValues];
+                            newArray[elementIndex] = { ...newArray[elementIndex], quantity: value };
+                            setOptionQuantityValues(newArray);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -291,19 +283,21 @@ const Main = () => {
             </section>
             <div className="sidebar">
               <div className="added-products">
-                {productTotals.map((item, index) => (
-                  (item.totalAmount > 0)
+                {optionQuantityValues.map(({
+                  price, quantity, label, currency,
+                }, index) => (
+                  (Number(quantity) > 0)
                     && (
                       <div
-                        key={item.label}
+                        key={label}
                         className="added-product"
                       >
-                        <div>{item.label}</div>
+                        <div>{label}</div>
                         <div>{optionQuantityValues[index].quantity}</div>
                         {(totalCart >= 0) && (
                         <div className="flex gap-4">
-                          <span>{item.currency}</span>
-                          <span>{(Number(item.totalAmount)).toLocaleString()}</span>
+                          <span>{currency}</span>
+                          <span>{((Number(quantity) * Number(price))).toLocaleString()}</span>
                         </div>
                         )}
                       </div>

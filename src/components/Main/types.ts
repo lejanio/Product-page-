@@ -1,5 +1,5 @@
 export type ProductType = {
-  name: string;
+  'name': string;
   'tags': string [];
   'options': [
     {
