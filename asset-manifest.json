@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/product-page/static/css/main.e5214424.chunk.css",
-    "main.js": "/product-page/static/js/main.d068a75a.chunk.js",
-    "main.js.map": "/product-page/static/js/main.d068a75a.chunk.js.map",
+    "main.css": "/product-page/static/css/main.62f19764.chunk.css",
+    "main.js": "/product-page/static/js/main.20a27f64.chunk.js",
+    "main.js.map": "/product-page/static/js/main.20a27f64.chunk.js.map",
     "runtime-main.js": "/product-page/static/js/runtime-main.d7d9c430.js",
     "runtime-main.js.map": "/product-page/static/js/runtime-main.d7d9c430.js.map",
-    "static/js/2.3eb2a2d2.chunk.js": "/product-page/static/js/2.3eb2a2d2.chunk.js",
-    "static/js/2.3eb2a2d2.chunk.js.map": "/product-page/static/js/2.3eb2a2d2.chunk.js.map",
+    "static/js/2.31574b1f.chunk.js": "/product-page/static/js/2.31574b1f.chunk.js",
+    "static/js/2.31574b1f.chunk.js.map": "/product-page/static/js/2.31574b1f.chunk.js.map",
     "index.html": "/product-page/index.html",
-    "static/css/main.e5214424.chunk.css.map": "/product-page/static/css/main.e5214424.chunk.css.map",
-    "static/js/2.3eb2a2d2.chunk.js.LICENSE.txt": "/product-page/static/js/2.3eb2a2d2.chunk.js.LICENSE.txt",
+    "static/css/main.62f19764.chunk.css.map": "/product-page/static/css/main.62f19764.chunk.css.map",
+    "static/js/2.31574b1f.chunk.js.LICENSE.txt": "/product-page/static/js/2.31574b1f.chunk.js.LICENSE.txt",
     "static/media/applepay_icon.19eb5188.svg": "/product-page/static/media/applepay_icon.19eb5188.svg",
     "static/media/march_expo_logo.aa77fdc7.png": "/product-page/static/media/march_expo_logo.aa77fdc7.png",
     "static/media/mastercard_icon.3af0e930.svg": "/product-page/static/media/mastercard_icon.3af0e930.svg",
@@ -19,8 +19,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.d7d9c430.js",
-    "static/js/2.3eb2a2d2.chunk.js",
-    "static/css/main.e5214424.chunk.css",
-    "static/js/main.d068a75a.chunk.js"
+    "static/js/2.31574b1f.chunk.js",
+    "static/css/main.62f19764.chunk.css",
+    "static/js/main.20a27f64.chunk.js"
   ]
 }
