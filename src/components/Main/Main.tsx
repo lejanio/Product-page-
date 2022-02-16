@@ -25,6 +25,7 @@ const Main = () => {
   const [starRating, setStarRating] = useState<string[]>([]);
   const [optionQuantityValues, setOptionQuantityValues] = useState(optionsInitialState);
   const [totalCart, setTotalCart] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const {
     name, gallery, options, reviews, shipping, tags, discount,
@@ -37,6 +38,7 @@ const Main = () => {
           const result = res.data;
 
           setProduct(result.product);
+          setIsLoading(false);
         });
     };
 
@@ -49,6 +51,7 @@ const Main = () => {
       for (let i = 0; i < Math.floor(Number(reviews.rating)); i += 1) {
         ratingArray.push(star);
       }
+
       setStarRating([...ratingArray]);
     };
 
@@ -65,7 +68,7 @@ const Main = () => {
     };
 
     calculateCartTotal();
-  }, [optionQuantityValues, totalCart]);
+  }, [optionQuantityValues]);
 
   // This array and sorting is necessary for displaying the price interval
 
@@ -78,7 +81,7 @@ const Main = () => {
 
   return (
     <>
-      {(name === '')
+      {(isLoading)
         ? (
           <img src={spinner} alt="Loading..." className="spinner" />
         )

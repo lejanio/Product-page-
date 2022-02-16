@@ -7,7 +7,7 @@ export const productInitialState: ProductType = {
     {
       label: '',
       price: {
-        value: '',
+        value: 0,
         currency: {
           code: '',
           symbol: '',
@@ -15,7 +15,7 @@ export const productInitialState: ProductType = {
         },
       },
       old_price: {
-        value: '',
+        value: 0,
         currency: {
           code: '',
           symbol: '',
@@ -26,7 +26,7 @@ export const productInitialState: ProductType = {
     {
       label: '',
       price: {
-        value: '',
+        value: 0,
         currency: {
           code: '',
           symbol: '',
@@ -34,7 +34,7 @@ export const productInitialState: ProductType = {
         },
       },
       old_price: {
-        value: '',
+        value: 0,
         currency: {
           code: '',
           symbol: '',
@@ -64,7 +64,7 @@ export const productInitialState: ProductType = {
         info: '',
       },
       cost: {
-        value: '',
+        value: 0,
         currency: {
           code: '',
           symbol: '',
@@ -101,7 +101,6 @@ export const optionsInitialState = [
     currency: 'R',
     price: '895.31',
     quantity: '0',
-    totalAmount: 0,
   },
   {
     label: 'Battery (Accessories)',
